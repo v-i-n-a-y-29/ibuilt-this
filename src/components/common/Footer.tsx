@@ -1,6 +1,6 @@
+'use cache'
 import React from 'react';
-
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (

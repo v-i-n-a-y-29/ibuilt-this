@@ -1,7 +1,8 @@
-import { Home, Compass, Sparkle, Sparkles, CompassIcon, HomeIcon, Ghost, UserIcon } from "lucide-react";
+import { Home, Compass, Sparkle, Sparkles, CompassIcon, HomeIcon, Ghost, UserIcon, LoaderIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { Suspense } from "react";
 
 const Logo = () => {
 
@@ -40,26 +41,33 @@ export default function Header() {
                         </Link>
                     </nav>
 
-                    <div className="flex items-center gap-3 ">
-                        <Show when="signed-out">
-                            <Button asChild variant="ghost" className="cursor-pointer">
-                                <SignInButton />
-                            </Button>
-                            <Button asChild variant="default" className="cursor-pointer rounded-2xl">
-                                <SignUpButton />
-                            </Button>
-                            
-                        </Show>
-                        <Show when="signed-in">
-                            <Button asChild>
-                                <Link href="/submit">
-                                    <Sparkles className="size-5" />
-                                    Submit Project
-                                </Link>
-                            </Button>
-                            <UserButton />
-                        </Show>
-                    </div>
+                    <Suspense fallback={
+                        <div>
+                            <LoaderIcon className="animate-spin size-5 text-primary" />
+                        </div>
+                    }>
+                        <div className="flex items-center gap-3 ">
+                            <Show when="signed-out">
+                                <Button asChild variant="ghost" className="cursor-pointer">
+                                    <SignInButton />
+                                </Button>
+                                <Button asChild variant="default" className="cursor-pointer rounded-2xl">
+                                    <SignUpButton />
+                                </Button>
+
+                            </Show>
+                            <Show when="signed-in">
+                                <Button asChild>
+                                    <Link href="/submit">
+                                        <Sparkles className="size-5" />
+                                        Submit Project
+                                    </Link>
+                                </Button>
+                                <UserButton />
+                            </Show>
+                        </div>
+                    </Suspense>
+
                 </div>
             </div>
         </header>
