@@ -1,5 +1,6 @@
 'use client'
 import { addProductAction } from "@/lib/products/product-actions";
+import type { FormState } from "@/lib/products/product-actions";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -8,7 +9,7 @@ import { LoaderIcon, Sparkles } from "lucide-react";
 import { useActionState } from "react";
 
 
-const initialState = {
+const initialState: FormState = {
     success: false,
     errors: {},
     message: ''
